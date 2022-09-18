@@ -1,4 +1,4 @@
-﻿
+﻿//Skapa en konsollapplikation som tar en textsträng (string) som argument till Main eller uppmanar användaren mata in en sträng i konsollen.
 //Textsträngen ska sedan sökas igenom efter alla delsträngar som är tal som börjar
 //och slutar på samma siffra, utan att start/slutsiffran, eller något annat tecken än
 //siffror förekommer där emellan.
@@ -7,37 +7,46 @@
 //t.ex 95a9 är inte heller ett korrekt tal.
 
 
-Console.WriteLine("Skriv in ett tal: ");
+Console.WriteLine("Hej! Skriv in ett tal: \n ");
 string input = Console.ReadLine();
-
 string delsträng = String.Empty;
-bool isDigit = false;
-
-//Kör ett varv i taget, hoppar in i nästa loop och kör så många varv i rad som längden på input. Så för varje varv kan man jämföra i med resten av innehållet i strängen.
+bool isDigit;
+string first = string.Empty;
+string last = string.Empty;
+double count = 0;
 
 for (int i = 0; i < input.Length; i++)
     {
-
-    Console.ForegroundColor = ConsoleColor.Red;
-    Console.WriteLine(input[i]);
-
-
     for (int j = i + 1; j < input.Length; j++)
         {
-        Console.ForegroundColor = ConsoleColor.Blue;
-        Console.WriteLine(input[j]);
-
         isDigit = Char.IsDigit(input[j]);
-
         if (isDigit)
             {
 
             if (input[i] == input[j])
 
                 {
-                delsträng = input.Substring(i, j - i + 1); //Sparar matchningen
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"Hittade en match! {delsträng}");
+                //Sparar delsträng
+                delsträng = input.Substring(i, j - i + 1);
+
+                //Summan av delsträngarna
+                double sum = double.Parse(delsträng);
+                count += sum;
+
+                first = input.Substring(0, i);
+
+                //För att få fram startindex till variabeln last
+                var length = first.Length + delsträng.Length;
+
+                last = input.Substring(length);
+
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.Write(first);
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.Write(delsträng);
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.Write(last + "\n");
+                Console.ForegroundColor = ConsoleColor.White;
                 }
 
             }
@@ -49,6 +58,7 @@ for (int i = 0; i < input.Length; i++)
         }
 
     }
+Console.WriteLine("Detta är summan av alla delsträngar: " + count);
 
 
 
