@@ -47,6 +47,7 @@ for (int i = 0; i < input.Length; i++)
                 Console.ForegroundColor = ConsoleColor.DarkYellow;
                 Console.Write(last + "\n");
                 Console.ForegroundColor = ConsoleColor.White;
+                break;
                 }
 
             }
